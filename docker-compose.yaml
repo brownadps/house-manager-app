@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  backend:
+    image: node:12
+    networks:
+      - hm-app
+    volumes:
+      - ./:/home/node/app
+    working_dir: /home/node/app
+    entrypoint: ./entrypoint.sh
+    environment:
+      PORT: "3000"
+    ports:
+      - 3000:3000
+
+  client:
+    image: node:12
+    networks:
+      - hm-app
+    volumes:
+      - ./src/client:/home/node/app
+    working_dir: /home/node/app
+    entrypoint: ./entrypoint.sh
+
+networks:
+  hm-app:
